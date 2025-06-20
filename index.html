@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV - Omar Ahmed Gouda</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+  <!-- html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f172a;
+      color: #ffffff;
+      scroll-behavior: smooth;
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .navbar {
+      background-color: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 0;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    .nav-link {
+      color: #ffffff !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #d4af37 !important;
+      transform: translateY(-2px);
+    }
+    .navbar-toggler {
+      border: none;
+      padding: 0;
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      width: 1.5em;
+      height: 1.5em;
+    }
+    .section {
+      min-height: 100vh;
+      padding: 4rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2dd4bf);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, transparent 70%);
+      opacity: 0.5;
+      animation: pulse 12s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.2; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+    .section-title {
+      position: relative;
+      margin-bottom: 2.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .section-title::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: #d4af37;
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+    }
+    .card {
+      background-color: rgba(30, 41, 59, 0.9);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+    .btn-gold {
+      background-color: #d4af37;
+      color: #0f172a;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-gold:hover {
+      background-color: #b8972e;
+      transform: scale(1.05);
+    }
+    .star-rating .fa-star {
+      color: #e4e5e9;
+    }
+    .star-rating .fa-star.checked {
+      color: #facc15;
+    }
+    .navbar-brand-container {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .navbar-brand-hidden {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    .toc-menu {
+      transition: all 0.3s ease;
+      background-color: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 12px 12px;
+      padding: 1.5rem;
+      display: none;
+    }
+    .toc-menu-hidden {
+      display: none;
+    }
+    .toc-menu-open {
+      display: block;
+      transform: translateX(0);
+    }
+    .section-hidden {
+      display: none;
+    }
+    @media (min-width: 769px) {
+      .toc-menu {
+        position: absolute;
+        top: 100%;
+        right: 2rem;
+        width: 220px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+      .navbar-nav {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .navbar-nav {
+        text-align: center;
+        padding: 1rem 0;
+      }
+      .nav-link {
+        padding: 0.75rem 0;
+      }
+      .toc-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 280px;
+        transform: translateX(100%);
+        z-index: 1000;
+        border-radius: 0;
+      }
+      .toc-menu-open {
+        transform: translateX(0);
+      }
+      .section {
+        padding: 3rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Navbar -->
+  <header class="navbar shadow-md">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="navbar-brand-container flex items-center gap-3">
+        <i class="fas fa-user-graduate text-gold-500 text-2xl"></i>
+        <h1 class="text-xl font-bold">CV - Omar Ahmed Gouda</h1>
+      </div>
+      <nav class="flex items-center gap-4">
+        <div class="collapse navbar-collapse md:flex md:items-center" id="navbarNav">
+          <ul class="navbar-nav flex flex-col md:flex-row gap-4 mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#profile">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#reviews">Reviews</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+        <button class="navbar-toggler md:hidden" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <button id="toc-toggle" class="text-gold-500 hover:text-gold-600 transition ml-4">
+          <i class="fas fa-list text-2xl"></i>
+        </button>
+      </nav>
+    </div>
+    <!-- Table of Contents Menu -->
+    <div id="toc-menu" class="toc-menu toc-menu-hidden">
+      <button id="toc-close" class="text-gold-500 mb-4 md:hidden"><i class="fas fa-times text-xl"></i></button>
+      <h3 class="text-lg font-bold text-gold-500 mb-4">CV Contents</h3>
+      <ul class="flex flex-col gap-2">
+        <li><a href="#profile" class="text-gray-300 hover:text-gold-500 transition section-link" data-section="profile">About</a></li>
+        <li><a href="#education" class="text-gray-300 hover:text-gold-500 transition section-link" data-section="education">Education</a></li>
+        <li><a href="#skills" class="text-gray-300 hover:text-gold-500 transition section-link" data-section="skills">Skills</a></li>
+        <li><a href="#projects" class="text-gray-300 hover:text-gold-500 transition section-link" data-section="projects">Projects</a></li>
+        <li><a href="#reviews" class="text-gray-300 hover:text-gold-500 transition section-link" data-section="reviews">Reviews</a></li>
+        <li><a href="#contact" class="text-gray-300 hover:text-gold-500 transition section-link" data-section="contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- About Section -->
+    <section id="profile" class="section hero text-center">
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <img src="D:\cv web\html\photo_2025-06-20_15-54-26.jpg" alt="Profile" class="w-48 h-48 rounded-full object-cover border-4 border-gold-500">
+          <div class="text-center w-full">
+            <h2 class="text-4xl md:text-5xl font-bold text-gold-500">Omar Ahmed Gouda</h2>
+            <p class="text-xl text-gray-300">Mechatronics Engineer</p>
+            <p class="text-gray-300 mt-4 max-w-none mx-auto">Innovative Mechatronics student passionate about combining mechanical design and programming to create smart solutions. Strong expertise in SolidWorks, Arduino, and web development, with a focus on embedded systems and stress analysis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section bg-gray-900 section-hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="section-title">Education</h2>
+        <div class="card">
+          <h3 class="text-xl font-semibold text-white">Bachelor of Mechatronics Engineering</h3>
+          <p class="text-gray-300">Egyptian Chinese University, Faculty of Engineering</p>
+          <p class="text-gray-300">September 2023 - September 2028</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section bg-gray-900 section-hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="section-title">Skills</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card">
+            <p class="font-semibold text-white">SolidWorks (Sheet Metal)</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">Arduino</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">HTML/CSS</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">JavaScript</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">C++/C</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">MATLAB</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">Embedded Systems</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">Stress Analysis</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="font-semibold text-white">Microsoft Office</p>
+            <div class="w-full bg-gray-700 rounded-full h-3">
+              <div class="bg-gold-500 h-3 rounded-full" style="width: 90%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-gray-900 section-hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="section-title">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card">
+            <h3 class="text-xl font-semibold text-gold-500">Fitness Program</h3>
+            <p class="text-gray-300">June 2025</p>
+            <p class="text-gray-300">Designed a comprehensive fitness program including workout and nutrition plans.</p>
+            <a href="https://omar2095.github.io/fitness/" class="text-gold-500 hover:text-gold-600 transition flex items-center gap-2 mt-2" target="_blank">
+              <i class="fas fa-link"></i> View Online
+            </a>
+          </div>
+          <div class="card">
+            <h3 class="text-xl font-semibold text-gold-500">Lifting Weights</h3>
+            <p class="text-gray-300">Designed a mechanical weightlifter with a 180-degree moving arm and 360-degree rotating body using SolidWorks, focusing on durability and efficiency.</p>
+            <a href="https://drive.google.com/file/d/13fsJmHMij6a3m57l-Bi_Qh9Bk5ab2Zkz/view?usp=drivesdk" class="btn-gold mt-4 inline-block">View PDF</a>
+          </div>
+          <div class="card">
+            <h3 class="text-xl font-semibold text-gold-500">Pinion Shaft</h3>
+            <p class="text-gray-300">An innovative gear system converting rotational motion to linear motion for vehicle steering, optimized for cost and precision.</p>
+            <a href="https://drive.google.com/file/d/1tbLT2kYOK4iDyOp_VAYDIQdNHbP3rZNl/view?usp=drivesdk" class="btn-gold mt-4 inline-block">View PDF</a>
+          </div>
+          <div class="card">
+            <h3 class="text-xl font-semibold text-gold-500">Smart Irrigation System</h3>
+            <p class="text-gray-300">A smart system using soil fertility sensors to determine optimal watering times, built with Arduino.</p>
+            <a href="https://drive.google.com/file/d/1PGgIZeRNaZSRf970k4BwOkcVuUgfbK9V/view?usp=drivesdk" class="btn-gold mt-4 inline-block">View PDF</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="section bg-gray-900 section-hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="section-title">Reviews</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card">
+            <h3 class="text-xl font-semibold text-white">Project Feedback</h3>
+            <div class="star-rating">
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star-half-alt checked"></i>
+              <span class="text-gray-300"> 4.5/5</span>
+            </div>
+            <p class="text-gray-300">"Omar's work on the Smart Irrigation System was innovative and efficient. Highly recommended!"</p>
+            <p class="font-semibold text-gray-300">- Client A</p>
+          </div>
+          <div class="card">
+            <h3 class="text-xl font-semibold text-white">Professional Collaboration</h3>
+            <div class="star-rating">
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star checked"></i>
+              <i class="fa fa-star"></i>
+              <span class="text-gray-300"> 4.0/5</span>
+            </div>
+            <p class="text-gray-300">"Great experience working with Omar on the Fitness Program website. Professional and detail-oriented."</p>
+            <p class="font-semibold text-gray-300">- Client B</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="section bg-gray-900 section-hidden">
+      <div class="container mx-auto px-4">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="card">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <p class="flex items-center gap-2"><i class="fas fa-envelope text-gold-500"></i> <a href="mailto:oma2005r200@gmail.com" class="text-gray-300 hover:text-gold-500 transition">oma2005r200@gmail.com</a></p>
+            <p class="flex items-center gap-2"><i class="fas fa-phone text-gold-500"></i> <a href="tel:+201096009904" class="text-gray-300 hover:text-gold-500 transition">01096009904</a></p>
+            <p class="flex items-center gap-2"><i class="fab fa-linkedin text-gold-500"></i> <a href="https://linkedin.com/in/omar-ahmed-2282602b2" target="_blank" class="text-gray-300 hover:text-gold-500 transition">linkedin.com/in/omar-ahmed</a></p>
+            <p class="flex items-center gap-2"><i class="fab fa-github text-gold-500"></i> <a href="https://github.com/omar2095" target="_blank" class="text-gray-300 hover:text-gold-500 transition">github.com/omar2095</a></p>
+            <p class="flex items-center gap-2"><i class="fas fa-globe text-gold-500"></i> <span class="text-gray-300">Languages: Arabic, English</span></p>
+          </div>
+          <button onclick="printPDF()" class="mt-6 btn-gold mx-auto flex items-center gap-2">
+            <i class="fas fa-download"></i> Download CV
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 py-8 text-center">
+    <p>© 2025 Omar Ahmed Gouda. All rights reserved.</p>
+    <div class="mt-4 flex justify-center gap-6">
+      <a href="https://linkedin.com/in/omar-ahmed-2282602b2" target="_blank" class="text-gold-500 hover:text-gold-600 transition"><i class="fab fa-linkedin text-2xl"></i></a>
+      <a href="https://github.com/omar2095" target="_blank" class="text-gold-500 hover:text-gold-600 transition"><i class="fab fa-github text-2xl"></i></a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script src="cv.js"></script>
+  <script src="html\cv.js"></script>
+</body>
+</html>
